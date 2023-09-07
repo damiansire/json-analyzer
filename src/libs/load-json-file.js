@@ -1,5 +1,4 @@
 const fs = require('fs');
-
 async function loadJSONFile(filePath) {
     try {
         const data = await new Promise((resolve, reject) => {
