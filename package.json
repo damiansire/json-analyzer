@@ -4,7 +4,7 @@
   "description": "node js module responsible for parsing JSON files and providing information about them",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm pack && npm install json-scan-1.0.0.tgz && mocha"
   },
   "repository": {
     "type": "git",
@@ -19,5 +19,12 @@
   "bugs": {
     "url": "https://github.com/damiansire/json-scan/issues"
   },
-  "homepage": "https://github.com/damiansire/json-scan#readme"
+  "homepage": "https://github.com/damiansire/json-scan#readme",
+  "devDependencies": {
+    "chai": "^4.3.8",
+    "mocha": "^10.2.0"
+  },
+  "dependencies": {
+    "json-scan": "file:json-scan-1.0.0.tgz"
+  }
 }
