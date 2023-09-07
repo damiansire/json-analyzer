@@ -1,6 +1,6 @@
 {
   "name": "json-scan",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "node js module responsible for parsing JSON files and providing information about them",
   "main": "src/index.js",
   "scripts": {
