@@ -47,8 +47,6 @@ In the example above, `getJSONShape` will return an object representing the shap
 
 ### `getByTag`
 
-#### Description
-
 This function allows you to search for objects within a JSON structure that contain a specified tag. It recursively searches through the JSON structure to find objects with the desired tag.
 
 #### Usage
@@ -115,8 +113,6 @@ The result we would obtain would be the following
 ```
 
 ### `loadJSONFile`
-
-#### Description
 
 This function is used to asynchronously load and parse a JSON file from a specified file path.
 
