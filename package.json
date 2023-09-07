@@ -1,11 +1,11 @@
 {
   "name": "json-scan",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "node js module responsible for parsing JSON files and providing information about them",
   "main": "src/index.js",
   "scripts": {
     "test": "mocha \"test/unit/**/*.test.js\"",
-    "integration": "npm pack && npm install json-scan-1.0.0.tgz && mocha test/"
+    "integration": "npm pack && npm install json-scan-1.0.1.tgz && mocha test/"
   },
   "repository": {
     "type": "git",
