@@ -1,5 +1,5 @@
 {
-  "name": "json-analyzer",
+  "name": "json-scan",
   "version": "1.0.0",
   "description": "node js module responsible for parsing JSON files and providing information about them",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/damiansire/json-analyzer.git"
+    "url": "git+https://github.com/damiansire/json-scan.git"
   },
   "keywords": [
     "nodejs",
@@ -17,7 +17,7 @@
   "author": "Damian Sire <damiansirecontacto@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/damiansire/json-analyzer/issues"
+    "url": "https://github.com/damiansire/json-scan/issues"
   },
-  "homepage": "https://github.com/damiansire/json-analyzer#readme"
+  "homepage": "https://github.com/damiansire/json-scan#readme"
 }
