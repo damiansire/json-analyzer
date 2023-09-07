@@ -122,7 +122,9 @@ function getJSONShape(json) {
     if (isSimpleObject(json)) {
         return getShape(json)
     } else if (Array.isArray(json)) {
-
+        const arrayTypes = json.map(getShape)
+        const uniqueTypes = removeDuplicates(arrayTypes);
+        return uniqueTypes;
     }
     throw new Error("format not considered")
 }

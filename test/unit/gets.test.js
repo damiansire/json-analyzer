@@ -292,6 +292,38 @@ describe("getJSONShape", () => {
         const result = getJSONShape(json);
         expect(result).to.deep.equal(expectedJson);
     })
+
+    it("Si es un array de objetos, devuelve las formas de los objetos que no se repiten", () => {
+
+        const json = [{
+            "name": "damian",
+            "surname": "sire",
+        },
+        {
+            name: "damian",
+            "venue": {
+                "name": "Lugar2",
+                "address": "Dirección2"
+            }
+        },
+        ]
+
+        const expectedJson = [{
+            "name": "string",
+            "surname": "string",
+        },
+        {
+            "name": "string",
+            "venue": {
+                "name": "string",
+                "address": "string"
+            }
+        },
+        ]
+
+        const result = getJSONShape(json);
+        expect(result).to.deep.equal(expectedJson);
+    })
 })
 
 

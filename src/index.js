@@ -1,5 +1,5 @@
 const loadJSONFile = require('./libs/load-json-file');
-const { getByTag } = require('../src/libs/gets');
+const { getByTag, getJSONShape } = require('../src/libs/gets');
 
 module.exports = {
     sum: function (a, b) {
@@ -7,5 +7,5 @@ module.exports = {
     },
     loadJSONFile,
     getByTag,
-
+    getJSONShape
 }
