@@ -6,7 +6,6 @@ describe("getByTag", () => {
     describe("se pasa como parametro algo que no es un objeto o una date", () => {
 
     })
-
     describe("se pasa como parametro un objeto simple", () => {
         it("Si el atributo no esta, se devuelve un array vacio", () => {
             const json = { name: "Damian" }
@@ -48,8 +47,6 @@ describe("getByTag", () => {
             expect(result).to.be.an('array').that.has.lengthOf(1);
             expect(result[0]).to.deep.equal(expectedJson);
         })
-
-
         it("Cuando el atributo anidado se encuentra en un array, se devuelve el array que contiene los atributos anidados", () => {
             const json = {
                 "name": "Damian",
@@ -103,10 +100,64 @@ describe("getByTag", () => {
             expect(result).to.be.an('array').that.has.lengthOf(1);
             expect(result[0]).to.deep.equal(expectedJson);
         })
-
-    })
-
-    describe("se pasa como parametro un array de objetos", () => {
-
+        it("un objeto que contiene un array, que contiene un array", () => {
+            const json = {
+                "family": [
+                    {
+                        "name": "Persona1",
+                        "family": [
+                            {
+                                "name": "Persona2",
+                                "surname": "Apellido2",
+                                family: [{
+                                    "name": "Persona2",
+                                    "surname": "Apellido2",
+                                },
+                                {
+                                    "name": "Persona2",
+                                    "surname": "Apellido2",
+                                }]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Persona2",
+                        "surname": "Apellido2",
+                        "venue": {
+                            "name": "Lugar2",
+                            "address": "Dirección2"
+                        },
+                        "family": []
+                    }
+                ]
+            }
+            const expectedJson = {
+                "family": [
+                    {
+                        "name": "Persona1",
+                        "family": [
+                            {
+                                "name": "Persona2",
+                                family: [{
+                                    "name": "Persona2",
+                                },
+                                {
+                                    "name": "Persona2",
+                                }]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Persona2",
+                        "venue": {
+                            "name": "Lugar2",
+                        },
+                    }
+                ]
+            }
+            const result = getByTag(json, "name");
+            expect(result).to.be.an('array').that.has.lengthOf(1);
+            expect(result[0]).to.deep.equal(expectedJson);
+        })
     })
 })

@@ -1,5 +1,16 @@
 const { isSimpleObject, isArrayOrObject, isEmptyObject } = require("./type-verification")
 
+function _getTagRecursiveInArray(value, tag) {
+    const deepSearchArr = [];
+    value.forEach(value => {
+        const deepSearch = _getTagRecursive(value, tag);
+        if (deepSearch) {
+            deepSearchArr.push(deepSearch);
+        }
+    })
+    return deepSearchArr;
+}
+
 /**
  * Recursively searches for objects with a specified tag within a JSON structure.
  *
@@ -22,13 +33,7 @@ function _getTagRecursive(searchableObject, tag) {
             }
         }
         else if (Array.isArray(value)) {
-            const deepSearchArr = [];
-            value.forEach(value => {
-                const deepSearch = _getTagRecursive(value, tag);
-                if (deepSearch) {
-                    deepSearchArr.push(deepSearch);
-                }
-            })
+            const deepSearchArr = _getTagRecursiveInArray(value, tag)
             if (deepSearchArr.length) {
                 newObj[key] = deepSearchArr
             }
@@ -37,6 +42,7 @@ function _getTagRecursive(searchableObject, tag) {
 
     return isEmptyObject(newObj) ? null : newObj;
 }
+
 
 /**
  * Retrieves objects containing a specified tag within a JSON structure.
@@ -48,27 +54,15 @@ function _getTagRecursive(searchableObject, tag) {
 function getByTag(json, tag) {
     isArrayOrObject(json);
     if (typeof json === 'object') {
-        if (json[tag]) {
-            debugger
-            const result = _getTagRecursive(json, tag)
-            if (result) {
-                return [result];
-            }
-            else {
-                return []
-            }
-        }
-        else {
-            return []
+        const result = _getTagRecursive(json, tag)
+        if (result) {
+            return [result];
         }
     }
     else if (Array.isArray(json)) {
-        for (element of json) {
-            if (isArrayOrObject(element)) {
-
-            }
-        }
+        return _getTagRecursiveInArray(json, tag)
     }
+    return [];
 
 }
 
