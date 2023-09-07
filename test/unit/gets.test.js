@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const { getByTag, _getTagRecursive } = require("../../src/libs/gets")
+const { getByTag, getJSONShape } = require("../../src/libs/gets")
 
 
 describe("getByTag", () => {
@@ -161,3 +161,52 @@ describe("getByTag", () => {
         })
     })
 })
+
+describe("getJSONShape", () => {
+    it("si es un objeto simple, devuelve un formato correcto", () => {
+        const json =
+        {
+            "name": "damian",
+            "surname": "sire",
+            age: 2,
+            "family": []
+        }
+        const expectedJson = {
+            "name": "string",
+            "surname": "string",
+            "age": "number",
+            "family": "array"
+        }
+        const result = getJSONShape(json);
+        debugger
+        expect(result).to.deep.equal(expectedJson);
+    })
+
+    it("si es un objeto simple, con objetos anidados, devuelve tambien el tipo de sus objetos", () => {
+        const json =
+        {
+            "name": "damian",
+            "surname": "sire",
+            age: 2,
+            "venue": {
+                "name": "Lugar2",
+                "address": "Dirección2"
+            },
+            "family": []
+        }
+        const expectedJson = {
+            "name": "string",
+            "surname": "string",
+            age: "number",
+            "venue": {
+                "name": "string",
+                "address": "string"
+            },
+            "family": "array"
+        }
+        const result = getJSONShape(json);
+        expect(result).to.deep.equal(expectedJson);
+    })
+})
+
+

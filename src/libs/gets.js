@@ -66,4 +66,48 @@ function getByTag(json, tag) {
 
 }
 
-module.exports = { getByTag };
+function getType(element) {
+    if (typeof element != "object") {
+        return typeof element
+    }
+    else if (Array.isArray(element)) {
+        return "array"
+    }
+    else if (element instanceof Date) {
+        return "date"
+    }
+    else if (element === null) {
+        return 'null';
+    }
+    return "object";
+}
+
+function getShape(obj) {
+    const shape = {}
+    const entries = Object.entries(obj);
+    entries.forEach(([key, value]) => {
+        const type = getType(value);
+        if (type === "object") {
+            shape[key] = getShape(value);
+        }
+        else if (type === "array") {
+            shape[key] = type;
+        }
+        else {
+            shape[key] = type;
+        }
+    })
+    return shape
+}
+
+function getJSONShape(json) {
+    debugger
+    if (isSimpleObject(json)) {
+        return getShape(json)
+    } else if (Array.isArray(json)) {
+
+    }
+    throw new Error("format not considered")
+}
+
+module.exports = { getByTag, getJSONShape };

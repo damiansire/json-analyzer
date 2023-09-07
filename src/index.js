@@ -6,6 +6,6 @@ module.exports = {
         return a + b;
     },
     loadJSONFile,
-    getByTag
+    getByTag,
 
 }
