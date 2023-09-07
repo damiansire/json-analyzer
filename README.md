@@ -1,5 +1,3 @@
-# npm Package ReadMe
-
 ## Description
 
 This npm package provides two main functions: `loadJSONFile`, `getJSONShape` and `getByTag`. These functions are designed to work with JSON data and perform the following tasks:
