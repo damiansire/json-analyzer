@@ -4,7 +4,8 @@
   "description": "node js module responsible for parsing JSON files and providing information about them",
   "main": "src/index.js",
   "scripts": {
-    "test": "npm pack && npm install json-scan-1.0.0.tgz && mocha"
+    "test": "mocha \"test/unit/**/*.test.js\"",
+    "integration": "npm pack && npm install json-scan-1.0.0.tgz && mocha test/"
   },
   "repository": {
     "type": "git",
