@@ -1,5 +1,7 @@
 const { isSimpleObject, isArrayOrObject, isEmptyObject } = require("./type-verification")
 
+const { removeDuplicates } = require("./remove-duplicates")
+
 function _getTagRecursiveInArray(value, tag) {
     const deepSearchArr = [];
     value.forEach(value => {
@@ -82,21 +84,7 @@ function getType(element) {
     return "object";
 }
 
-function removeDuplicates(array) {
-    const uniqueArray = [];
-    const seenObjects = new Set();
 
-    for (const item of array) {
-        const stringifiedItem = JSON.stringify(item);
-
-        if (!seenObjects.has(stringifiedItem)) {
-            seenObjects.add(stringifiedItem);
-            uniqueArray.push(item);
-        }
-    }
-
-    return uniqueArray;
-}
 
 function getShape(obj) {
     const shape = {}
