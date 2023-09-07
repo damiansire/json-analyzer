@@ -1,5 +1,12 @@
 const { isSimpleObject, isArrayOrObject, isEmptyObject } = require("./type-verification")
 
+/**
+ * Recursively searches for objects with a specified tag within a JSON structure.
+ *
+ * @param {Object} searchableObject - The JSON object to search within.
+ * @param {string} tag - The tag to search for.
+ * @returns {Object | null} - An object containing the tag and its containers, or null if not found.
+ */
 function _getTagRecursive(searchableObject, tag) {
     const entries = Object.entries(searchableObject);
 
@@ -31,6 +38,13 @@ function _getTagRecursive(searchableObject, tag) {
     return isEmptyObject(newObj) ? null : newObj;
 }
 
+/**
+ * Retrieves objects containing a specified tag within a JSON structure.
+ *
+ * @param {Object | Array} json - The JSON object or array to search within.
+ * @param {string} tag - The tag to search for.
+ * @returns {Array} - An array of objects containing the specified tag.
+ */
 function getByTag(json, tag) {
     isArrayOrObject(json);
     if (typeof json === 'object') {
@@ -57,7 +71,5 @@ function getByTag(json, tag) {
     }
 
 }
-
-const _internalFunctions = { _getTagRecursive }
 
 module.exports = { getByTag };
