@@ -82,6 +82,22 @@ function getType(element) {
     return "object";
 }
 
+function removeDuplicates(array) {
+    const uniqueArray = [];
+    const seenObjects = new Set();
+
+    for (const item of array) {
+        const stringifiedItem = JSON.stringify(item);
+
+        if (!seenObjects.has(stringifiedItem)) {
+            seenObjects.add(stringifiedItem);
+            uniqueArray.push(item);
+        }
+    }
+
+    return uniqueArray;
+}
+
 function getShape(obj) {
     const shape = {}
     const entries = Object.entries(obj);
@@ -91,7 +107,9 @@ function getShape(obj) {
             shape[key] = getShape(value);
         }
         else if (type === "array") {
-            shape[key] = type;
+            const arrayTypes = value.map(getShape);
+            const uniqueTypes = removeDuplicates(arrayTypes);
+            shape[key] = uniqueTypes;
         }
         else {
             shape[key] = type;
@@ -101,7 +119,6 @@ function getShape(obj) {
 }
 
 function getJSONShape(json) {
-    debugger
     if (isSimpleObject(json)) {
         return getShape(json)
     } else if (Array.isArray(json)) {

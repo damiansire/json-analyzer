@@ -175,7 +175,7 @@ describe("getJSONShape", () => {
             "name": "string",
             "surname": "string",
             "age": "number",
-            "family": "array"
+            "family": []
         }
         const result = getJSONShape(json);
         debugger
@@ -202,7 +202,92 @@ describe("getJSONShape", () => {
                 "name": "string",
                 "address": "string"
             },
-            "family": "array"
+            "family": []
+        }
+        const result = getJSONShape(json);
+        expect(result).to.deep.equal(expectedJson);
+    })
+
+
+    it("si es un objeto que contiene arrays con elemento del mismo tipo, devuelve el tipo de los elementos del array", () => {
+        const json =
+        {
+            "name": "damian",
+            "surname": "sire",
+            age: 2,
+            "venue": {
+                "name": "Lugar2",
+                "address": "Dirección2"
+            },
+            "family": [{
+                "name": "dummyName",
+                "connection": "Father"
+            },
+            {
+                "name": "dummyName",
+                "connection": "Father"
+            },
+            {
+                "name": "dummyName",
+                "connection": "Father"
+            },
+            {
+                "name": "dummyName",
+                "connection": "Father"
+            }]
+        }
+        const expectedJson = {
+            "name": "string",
+            "surname": "string",
+            age: "number",
+            "venue": {
+                "name": "string",
+                "address": "string"
+            },
+            "family": [{
+                "name": "string",
+                "connection": "string"
+            }]
+        }
+        const result = getJSONShape(json);
+        expect(result).to.deep.equal(expectedJson);
+    })
+
+    it("si es un objeto que contiene arrays con elemento de diferente tipo, devuelve el tipo de los elementos del array", () => {
+        const json =
+        {
+            "name": "damian",
+            "surname": "sire",
+            age: 2,
+            "venue": {
+                "name": "Lugar2",
+                "address": "Dirección2"
+            },
+            "family": [{
+                "name": "dummyName",
+                "connection": "Father"
+            },
+            {
+                "surname": "dummyName",
+                "connection": "Father"
+            },]
+        }
+        const expectedJson = {
+            "name": "string",
+            "surname": "string",
+            age: "number",
+            "venue": {
+                "name": "string",
+                "address": "string"
+            },
+            "family": [{
+                "name": "string",
+                "connection": "string"
+            },
+            {
+                "surname": "string",
+                "connection": "string"
+            }]
         }
         const result = getJSONShape(json);
         expect(result).to.deep.equal(expectedJson);
